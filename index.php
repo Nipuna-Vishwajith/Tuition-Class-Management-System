@@ -5,6 +5,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,9 +14,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <title>View all Students(index)</title>
+    
+    
 </head>
 <body>
-  
+ 
     <div class="container mt-4">
 
         <?php include('message.php'); ?>
@@ -35,21 +38,23 @@
                         </div>
                     </div>
                     <div class="card-body">
-
+                    <caption>STUDENTS MAIN CONTROL PANEL</caption>
                         <table class="table table-bordered table-striped">
+                        
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Index Number</th>
                                     <th>Student Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
-                                    <th>Subject</th>
+                                    <th>Date Joined</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                    $query = "SELECT * FROM students";
+                                    $query = "SELECT * FROM student";
                                     $query_run = mysqli_query($con, $query);
 
                                     if(mysqli_num_rows($query_run) > 0)
@@ -58,16 +63,25 @@
                                         {
                                             ?>
                                             <tr>
-                                                <td><?= $student['id']; ?></td>
-                                                <td><?= $student['name']; ?></td>
+                                                <td><?= $student['stId']; ?></td>
+                                                <td><?= $student['indexNumber']; ?></td>
+                                                <td><?= $student['stName']; ?></td>
                                                 <td><?= $student['email']; ?></td>
                                                 <td><?= $student['phone']; ?></td>
-                                                <td><?= $student['subject']; ?></td>
+                                                <td><?= $student['dateJoined']; ?></td>
                                                 <td>
-                                                    
-                                                    <a href="student-edit.php?id=<?= $student['id']; ?>" class="btn btn-success btn-sm">Edit</a>
+                                            
+                                                     <a href="parent-add.php?id=<?= $student['indexNumber']; ?>" class="btn btn-success btn-sm">update parent</a>
+                                                     <a href="parent-view.php?id=<?=$student['indexNumber']; ?>" class="btn btn-info btn-sm">View Parent</a>
+                                                     <a href="student-edit.php?id=<?= $student['stId']; ?>" class="btn btn-secondary btn-sm">Edit Student </a>
                                                     <form action="code.php" method="POST" class="d-inline">
-                                                        <button type="submit" name="delete_student" value="<?=$student['id'];?>" class="btn btn-danger btn-sm">Delete</button>
+                                                        <button type="submit" name="delete_student" value="<?=$student['indexNumber'];?>" class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
+                                                    <form action="code.php" method="POST" class="d-inline">
+                                                        <button type="submit" name="add_maths" value="<?=$student['indexNumber'];?>" class="btn btn-warning btn-sm">Add Maths</button>
+                                                    </form>
+                                                    <form action="code.php" method="POST" class="d-inline">
+                                                        <button type="submit" name="add_science" value="<?=$student['indexNumber'];?>" class="btn btn-warning btn-sm">Add Science</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -79,17 +93,23 @@
                                         echo "<h5> No Record Found </h5>";
                                     }
                                 ?>
-                                
                             </tbody>
                         </table>
+                       
                         <div class="card-header">
                     <h4>View Maths Class Students only 
-                            <a href="maths11.php" class="btn btn-info float-end">Maths Class</a>
+                            <a href="maths11.php" class="btn btn-warning float-end">Maths Class</a>
                         </h4>
                     </div>
                     <div class="card-header">
-                        <h4>View Maths Class Students only
-                            <a href="sinhala11.php" class="btn btn-info float-end">Sinhala class</a>
+                        <h4>View Science Class Students only
+                            <a href="science11.php" class="btn btn-warning float-end">Science class</a>
+                        </h4>
+                        </div>
+
+                        <div class="card-header">
+                        <h4>Task
+                            <a href="both11.php" class="btn btn-warning float-end">Task</a>
                         </h4>
                         </div>
                     

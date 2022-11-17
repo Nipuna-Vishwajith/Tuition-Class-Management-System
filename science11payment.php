@@ -47,7 +47,7 @@
                             <tbody>
                                 <?php
                                  
-                                    $query = "SELECT payments.*,student.stName FROM student,payments WHERE student.indexNumber = payments.indexNumber AND payments.sbId='200' " ;
+                                    $query = "SELECT payments.*,student.stName FROM student,payments WHERE student.indexNumber = payments.indexNumber AND payments.sbId='201' " ;
                                     $query_run = mysqli_query($con, $query);
                                     if(mysqli_num_rows($query_run) > 0)
                                     {

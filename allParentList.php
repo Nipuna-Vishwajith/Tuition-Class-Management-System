@@ -12,11 +12,11 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <title>Sinhala Class - Grade 11</title>
+    <title>Parent List</title>
 </head>
 <body>
 <h4 class="text-center">PRINCETON EDUCATION INSTITUTE</h4>  
-<h4 class="text-center">Sinhala Class - Grade 11 - Students Details</h4>
+<h4 class="text-center">Parent List Of all students in the Institute</h4>
   
     <div class="container mt-4">
 
@@ -26,7 +26,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                    <h4> <a href="index.php" class="btn btn-danger float-end">Back</a>
+                    <h4> <a href="home.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
                     </div>
@@ -36,35 +36,34 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Guardian Name</th>
                                     <th>Student Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Date Joined</th>
-                                    <th>Action</th>
+                                    <th>Student Index Number</th>
+                                    <th>Guardian Occupation</th>
+                                    <th>Relationship with the Student</th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                    $query = "SELECT * FROM students WHERE subject= 'Sinhala' " ;
+                                    $query = "SELECT * 
+                                            FROM guardian " ;
                                     $query_run = mysqli_query($con, $query);
 
                                     if(mysqli_num_rows($query_run) > 0)
                                     {
-                                        foreach($query_run as $student)
+                                        foreach($query_run as $parent)
                                         {
                                             ?>
                                             <tr>
-                                                <td><?= $student['id']; ?></td>
-                                                <td><?= $student['name']; ?></td>
-                                                <td><?= $student['email']; ?></td>
-                                                <td><?= $student['phone']; ?></td>
-                                                <td><?= $student['dateJoined']; ?></td>
-                                                <td>
-                                                    <a href="student-edit.php?id=<?= $student['id']; ?>" class="btn btn-success btn-sm">Edit</a>
-                                                    <form action="code.php" method="POST" class="d-inline">
-                                                        <button type="submit" name="delete_student" value="<?=$student['id'];?>" class="btn btn-danger btn-sm">Delete</button>
-                                                    </form>
-                                                </td>
+                                                <td><?= $parent['gId']; ?></td>
+                                                <td><?= $parent['gName']; ?></td>
+                                                <td><?= $parent['name']; ?></td>
+                                                <td><?= $parent['indexNumber']; ?></td>
+                                                <td><?= $parent['gOccupation']; ?></td>
+                                                <td><?= $parent['gRelation']; ?></td>
+                                                
+                                            
                                             </tr>
                                             <?php
                                         }

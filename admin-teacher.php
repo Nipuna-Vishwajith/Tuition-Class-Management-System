@@ -28,11 +28,7 @@
                             <a href="home.php" class="btn btn-danger float-end">Back to Admin-Homepage</a>
                         </h4>
                     </div>
-                    <div class="card-header">
-                        <h4>Add a new teacher for the system
-                            <a href="teacher-create.php" class="btn btn-primary float-end">Add a new teacher</a>
-                        </h4>
-                        </div>
+                   
                     </div>
                     <div class="card-body">
 
@@ -48,7 +44,7 @@
                             </thead>
                             <tbody>
                                 <?php 
-                                    $query = "SELECT * FROM teachers";
+                                    $query = "SELECT * FROM teacher";
                                     $query_run = mysqli_query($con, $query);
 
                                     if(mysqli_num_rows($query_run) > 0)
@@ -57,16 +53,14 @@
                                         {
                                             ?>
                                             <tr>
-                                                <td><?= $teacher['tid']; ?></td>
+                                                <td><?= $teacher['tId']; ?></td>
                                                 <td><?= $teacher['name']; ?></td>
                                                 <td><?= $teacher['tp']; ?></td>
                                                 <td><?= $teacher['email']; ?></td>
                                                 <td>
         
-                                                    <a href="teacher-edit.php?id=<?= $teacher['tid']; ?>" class="btn btn-success btn-sm">Edit</a>
-                                                    <form action="code.php" method="POST" class="d-inline">
-                                                        <button type="submit" name="delete_teacher" value="<?=$teacher['tid'];?>" class="btn btn-danger btn-sm">Delete</button>
-                                                    </form>
+                                                    <a href="teacher-edit.php?id=<?= $teacher['tId']; ?>" class="btn btn-success btn-sm">Edit Teacher info</a>
+                                        
                                                 </td>
                                             </tr>
                                             <?php

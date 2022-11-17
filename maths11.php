@@ -17,6 +17,7 @@
 <body>
 <h4 class="text-center">PRINCETON EDUCATION INSTITUTE</h4>  
 <h4 class="text-center">Maths Class - Grade 11 - Students Details</h4>
+  
     <div class="container mt-4">
 
         <?php include('message.php'); ?>
@@ -34,7 +35,7 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>INDEX NUMBER</th>
                                     <th>Student Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
@@ -44,28 +45,31 @@
                             </thead>
                             <tbody>
                                 <?php 
-                                    $query = "SELECT * FROM students WHERE subject= 'Maths' " ;
+                                    $query = "SELECT learn.indexNumber,student.* 
+                                            FROM learn,student 
+                                            WHERE sbId= '200' AND learn.indexNumber=student.indexNumber " ;
                                     $query_run = mysqli_query($con, $query);
 
                                     if(mysqli_num_rows($query_run) > 0)
                                     {
-                                        foreach($query_run as $student)
+                                        foreach($query_run as $learn)
                                         {
                                             ?>
                                             <tr>
-                                                <td><?= $student['id']; ?></td>
-                                                <td><?= $student['name']; ?></td>
-                                                <td><?= $student['email']; ?></td>
-                                                <td><?= $student['phone']; ?></td>
-                                                <td><?= $student['dateJoined']; ?></td>
+                                                <td><?= $learn['indexNumber']; ?></td>
+                                                <td><?= $learn['stName']; ?></td>
+                                                <td><?= $learn['email']; ?></td>
+                                                <td><?= $learn['phone']; ?></td>
+                                                <td><?= $learn['dateJoined']; ?></td>
+                                                
                                                 <td>
-                                                    <a href="student-edit.php?id=<?= $student['id']; ?>" class="btn btn-success btn-sm">Edit</a>
+                                                <a href="parent-view.php?id=<?=$learn['indexNumber']; ?>" class="btn btn-info btn-sm">View Parent</a>
+                                                <a href="student-edit.php?id=<?= $learn['stId']; ?>" class="btn btn-success btn-sm">Edit Student </a>
                                                     <form action="code.php" method="POST" class="d-inline">
-                                                        <button type="submit" name="delete_student" value="<?=$student['id'];?>" class="btn btn-danger btn-sm">Delete</button>
+                                                        <button type="submit" name="delete_mathsStudent" value="<?=$learn['indexNumber'];?>" class="btn btn-danger btn-sm">Delete!</button>
                                                     </form>
                                                 </td>
                                             </tr>
-                                            <h4> <a href="contact.php" class="btn btn-danger float-end">contact</a></h4>
                                             <?php
                                         }
                                     }

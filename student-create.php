@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'dbcon.php';
 ?>
 
 <!doctype html>
@@ -15,7 +16,9 @@ session_start();
     <title>Student Create</title>
 </head>
 <body>
-  
+
+
+
     <div class="container mt-5">
 
         <?php include('message.php'); ?>
@@ -29,33 +32,37 @@ session_start();
                         </h4>
                     </div>
                     <div class="card-body">
-                        <form action="code.php" method="POST">
 
+                        <form action="code.php" method="POST">
+                                   
                             <div class="mb-3">
                                 <label>Student Name</label>
                                 <input type="text" name="name" class="form-control">
+                            </div>
+
+                            <?php
+                        echo "If the student hasn't Index number please use this as the index number = "
+                        ?>
+                        <?php   
+                        $sql = mysqli_query($con,"SELECT indexNumber FROM student order by indexNumber DESC limit 1 ");
+                        $print_data=mysqli_fetch_row($sql);
+                        echo $print_data[0]+1;
+                        echo"\n";
+                        ?>  
+
+                            <div class="mb-3">
+                                <label>Index Number</label>
+                                <input type="text" name="indexNumber" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label>Student Email</label>
                                 <input type="email" name="email" class="form-control">
                             </div>
                             <div class="mb-3">
-                                <label>Student Phone</label>
+                                <label>Student Phone/Whatsapp</label>
                                 <input type="text" name="phone" class="form-control">
                             </div>
                             
-                            <div class="mb-3">
-                                <label>Guardian Name</label>
-                                <input type="text" name="pName" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label>Guardian Occupation</label>
-                                <input type="text" name="pOccupation" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label>Guardians relationship with student</label>
-                                <input type="text" name="pRelation" class="form-control">
-                            </div>
                             <div class="mb-3">
                                 <label>Date joined with Class</label>
                                 <input type="date" name="dateJoined" class="form-control">
@@ -72,4 +79,4 @@ session_start();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+                                        </html>

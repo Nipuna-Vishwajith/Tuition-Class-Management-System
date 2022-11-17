@@ -25,8 +25,8 @@ require 'dbcon.php';
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Student Edit 
-                            <a href="index.php" class="btn btn-danger float-end">BACK</a>
+                        <h4>Edit Teacher Details 
+                            <a href="admin-teacher.php" class="btn btn-danger float-end">BACK</a>
                         </h4>
                     </div>
                     <div class="card-body">
@@ -34,37 +34,41 @@ require 'dbcon.php';
                         <?php
                         if(isset($_GET['id']))
                         {
-                            $student_id = mysqli_real_escape_string($con, $_GET['id']);
-                            $query = "SELECT * FROM student WHERE stId='$student_id' ";
-                            $query_run = mysqli_query($con, $query);
+                            $teacher_id = mysqli_real_escape_string($con, $_GET['id']);
+                            $query = "SELECT * FROM teacher WHERE tId='$teacher_id' ";
 
-                            if(mysqli_num_rows($query_run) > 0)
-                            {
-                                $student = mysqli_fetch_array($query_run);
+
+                            $query_run = mysqli_query($con, $query);
+                           
+                            if(mysqli_num_rows($query_run) > 0 )
+                            {   
+                                $teacher = mysqli_fetch_array($query_run);
+                        
                                 ?>
                                 <form action="code.php" method="POST">
-                                    <input type="hidden" name="student_id" value="<?= $student['stId']; ?>">
+                                    <input type="hidden" name="teacher_id" value="<?= $teacher['tId']; ?>">
+                                    
+                                    <div class="mb-3">
+                                        <label>Teacher Name</label>
+                                        <input  name="name" value="<?=$teacher['name'];?>"  class="form-control">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                <label>Email</label>
+                                <input  name="email" value="<?=$teacher['email'];?>"  class="form-control">
+                                
+                            </div>
 
-                                    <div class="mb-3">
-                                <label>Student Name</label>
-                                <input type="text" name="name" value="<?=$student['stName'];?>"  class="form-control">
-                            </div>
                             <div class="mb-3">
-                                <label>Student Email</label>
-                                <input type="email" name="email"value="<?=$student['email'];?>" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label>Student Phone</label>
-                                <input type="text" name="phone" value="<?=$student['phone'];?>" class="form-control">
+                                <label>Contact Number</label>
+                                <input  name="phone" value="<?=$teacher['tp'];?>"  class="form-control">
                             </div>
                            
-                           
                             <div class="mb-3">
-                                <label>Date joined with Class</label>
-                                <input type="date" name="dateJoined" value="<?=$student['dateJoined'];?>" class="form-control">
-                            </div>
+
+                          
                                     <div class="mb-3">
-                                        <button type="submit" name="update_student" class="btn btn-primary">Update Student</button>
+                                        <button type="submit" name="update_teacher" class="btn btn-primary">Update Teacher</button>
                                     </div>
 
                                 </form>
@@ -74,6 +78,8 @@ require 'dbcon.php';
                             {
                                 echo "<h4>No Such Id Found</h4>";
                             }
+
+                           
                         }
                         ?>
                     </div>

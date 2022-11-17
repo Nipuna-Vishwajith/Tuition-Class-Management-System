@@ -12,9 +12,11 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <title>admin timetable</title>
+    <title>Maths Class - Grade 11</title>
 </head>
 <body>
+<h4 class="text-center">PRINCETON EDUCATION INSTITUTE</h4>  
+<h4 class="text-center">Science Class - Grade 11 - Students Details</h4>
   
     <div class="container mt-4">
 
@@ -24,55 +26,48 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                    <h4>Go to Admin-homepage 
-                            <a href="home.php" class="btn btn-danger float-end">Back to Admin-Homepage</a>
+                    <h4> <a href="index.php" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
-                    <!--<div class="card-header">
-                        <h4>Create a new timetable for a class
-                            <a href="timetable-create.php" class="btn btn-primary float-end">Add a new class</a>
-                        </h4>
-                        </div>-->
                     </div>
                     <div class="card-body">
 
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Subject NAME</th>
-                                    <th>Subject ID</th>
-                                    <th>Teacher NAME</th>
-                                    <th>TEACHER ID</th>
-                                    <th>DAY</th>
-                                    <th>TIME</th>
-                                    <th>ACTION</th>
+                                    <th>INDEX NUMBER</th>
+                                    <th>Student Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Date Joined</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                    $query = "SELECT subject.*,teacher.* 
-                                    FROM subject,teacher
-                                    WHERE subject.tId=teacher.tId";
+                                    $query = "SELECT learn.indexNumber,student.* 
+                                            FROM learn,student 
+                                            WHERE sbId= '201' AND learn.indexNumber=student.indexNumber " ;
                                     $query_run = mysqli_query($con, $query);
 
                                     if(mysqli_num_rows($query_run) > 0)
                                     {
-                                        foreach($query_run as $timetable)
+                                        foreach($query_run as $learn)
                                         {
                                             ?>
                                             <tr>
-                                                <td><?= $timetable['sbName']; ?></td>
-                                                <td><?= $timetable['sbId']; ?></td>
-                                                <td><?= $timetable['name']; ?></td>
-                                                <td><?= $timetable['tId']; ?></td>
-                                               
-                                                <td><?= $timetable['day']; ?></td>
-                                                <td><?= $timetable['time']; ?></td>
+                                                <td><?= $learn['indexNumber']; ?></td>
+                                                <td><?= $learn['stName']; ?></td>
+                                                <td><?= $learn['email']; ?></td>
+                                                <td><?= $learn['phone']; ?></td>
+                                                <td><?= $learn['dateJoined']; ?></td>
                                                 
                                                 <td>
-                                                    
-                                                    <a href="timetable-edit.php?id=<?= $timetable['sbId']; ?>" class="btn btn-success btn-sm">Edit</a>
-                                                
+                                                <a href="parent-view.php?id=<?=$learn['indexNumber']; ?>" class="btn btn-info btn-sm">View Parent</a>
+                                                <a href="student-edit.php?id=<?= $learn['stId']; ?>" class="btn btn-success btn-sm">Edit Student </a>
+                                                    <form action="code.php" method="POST" class="d-inline">
+                                                        <button type="submit" name="delete_scienceStudent" value="<?=$learn['indexNumber'];?>" class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                             <?php
@@ -86,7 +81,7 @@
                                 
                             </tbody>
                         </table>
-
+                    
                     </div>
                 </div>
             </div>

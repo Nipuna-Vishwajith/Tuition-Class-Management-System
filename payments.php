@@ -28,70 +28,78 @@ session_start();
                             <a href="home.php" class="btn btn-danger float-end">BACK</a>
                         </h4>
                     </div>
-                    <!--First payment of a student-->
-                    <div class="card-body">
-                        <form action="code.php" method="POST">
-<h5>If a newly added student please use this form for the first payment</h5>
-                            <div class="mb-3">
-                                <label>Student Id</label>
-                                <input type="text" name="stId" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label>Student Name</label>
-                                <input type="text" name="name" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label>Amount</label>
-                                <input type="text" name="amount" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label>Month</label>
-                                <input type="text" name="month" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label>Subject</label>
-                                <input type="text" name="subject" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <button type="submit" name="save_payment" class="btn btn-primary">Save Payment</button>
-                            </div>
-                        </form>
-                    </div>
-</div>
+                
+                    <!--upper form start -->
+                     
+                    <!--upper form end-->
+
+                    <div class="card">
+                        <div class="card-body">
+                            <?php
+                            if(isset($_POST['submit'])){
+                                $indexNumber=$_POST["indexNumber"];
+                            }
+                            ?>
+
+                    <form action="payment-view.php" method="POST">
+                        <h5>Search the index number for past payments</h5>
+                         <label>Student Index Number</label>
+                        <input type="text" name="indexNumber" class="form-control">
+
+                        <label>Class Id (Maths - 200 , Science - 201)</label>
+                        <input type="text" name="sbId" class="form-control">
+
+                    <input button type = "submit" value="Show Past Payments Details" name="submit"class="btn btn-primary"></button>
+                        </form> 
+                        </div>
+                        </div>
+
 
                       <!--Normal payment of a student-->
-                      <h5></h5>
+                      <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                      <div class="card-header">
+                      <h5> </h5>
                       <div class="card">
                       <div class="card-body">
                         <form action="code.php" method="POST">
                         <h5></h5>
                         <h5></h5>
-<h5>Please use this form to add a payment of an ordinary student</h5>
+                        <h5>Add a new payment</h5>
                             <div class="mb-3">
-                                <label>Student Id</label>
-                                <input type="text" name="stId" class="form-control">
+                                <label>Student Index Number</label>
+                                <input type="text" name="indexNumber" class="form-control">
                             </div>
                             <div class="mb-3">
-                                <label>Student Name</label>
-                                <input type="text" name="name" class="form-control">
+                                <label>Class ID (Maths - 200 , Science - 201)</label>
+                                <input type="text" name="sbId" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label>Amount</label>
                                 <input type="text" name="amount" class="form-control">
                             </div>
                             <div class="mb-3">
+                                <label for="">Month</label>
+                                <select name="month" class = "form-control">
+                                    <option value="">--Select Month--</option>
+                                    <option value="January">January</option>
+                                    <option value="February">February</option>
+                                    <option value="March">March</option>
+                                    <option value="April">April</option>
+                                </select>
+                            </div>
+                            <!--<div class="mb-3">
                                 <label>Month</label>
                                 <input type="text" name="month" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label>Subject</label>
-                                <input type="text" name="subject" class="form-control">
-                            </div>
+                            </div>-->
+                          
                             <div class="mb-3"> 
                                 <button type="submit" name="update_payment" class="btn btn-primary">Update Payment</button>
                             </div>
                         </form>
                     </div>
+                    </div></div>
                     <div class="card-header">
                     <h4>View Maths Class Students payment details 
                             <a href="maths11payment.php" class="btn btn-info float-end">Maths Class</a>
@@ -99,7 +107,7 @@ session_start();
                     </div>
                     <div class="card-header">
                         <h4>View Sinhala Class Students payment details
-                            <a href="sinhala11payment.php" class="btn btn-info float-end">Sinhala class</a>
+                            <a href="science11payment.php" class="btn btn-info float-end">Science Class</a>
                         </h4>
                         </div>
                 </div>
